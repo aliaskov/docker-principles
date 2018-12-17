@@ -1,0 +1,17 @@
+#docker-compose version
+version: '3.3'
+
+services:
+
+  db:
+    container_name: db
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=r00t
+    ports:
+      - "3306:3306"
+
+  web: 
+   container_name: web
+   image: web:latest
+
