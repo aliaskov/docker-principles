@@ -44,7 +44,7 @@ This show the ``Hello world`` message and type that it's alive. Ctrl + c to inte
 
 Docker build
 --------------
-To build local docker image run: ::
+To build local docker image run: 
   ``docker build app``
 
 Where app is the directory, where Dockerfile is located.
@@ -65,7 +65,7 @@ Step 4/4 : ENTRYPOINT java -jar Main.jar
 Successfully built ca4f636e0e79
 
 ```
-After this wee can tag the local image: ::
+After this wee can tag the local image: 
   ``docker tag ca4f636e0e79 javahelloworld``
 
 Now we can run container from local image javahelloworld (ctrl +c to interrupt): ::
@@ -130,17 +130,16 @@ Where:
 
 
 Stop mysql container
-`` docker stop some-mysql
-``
+ `` docker stop some-mysql ``
+
 Start mysql container
-`` docker start some-mysql
-``
+  `` docker start some-mysql ``
 
 
   Docker-compose
   --------------
 
-```
+```yml
 #docker-compose version
 version: '3.3'
 
