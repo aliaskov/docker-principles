@@ -109,9 +109,30 @@ Push image to dockerhub: ::
 Also possible: ::
   docker build -t aliaskov/javahelloworld:latest app
 
+Get full image info : ::
+  docker inspect
 
 
 
+Run mysql container
+
+``  docker run -p 3306:3306 --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest
+``
+Where:
+  some-mysql is the container name
+  -e MYSQL_ROOT_PASSWORD - environment variable
+  my-secret-pw - mysql root password
+  -d - detached mode
+   mysql:latest - image name and version tag
+
+
+
+Stop mysql container
+`` docker stop some-mysql
+``
+Start mysql container
+`` docker start some-mysql
+``
 
 
   Docker-compose
