@@ -10,7 +10,7 @@ Compile class
 
 For compile the main class for package, execute the follow command: ::
 
-  javac HelloWorld/Main.java
+``  javac HelloWorld/Main.java``
 
 This generate the ``Main.class`` file into ``HelloWorld`` directory.
 
@@ -19,7 +19,7 @@ Run class
 
 For run the main class for package, execute the follow command: ::
 
-  java -cp . HelloWorld.Main
+``  java -cp . HelloWorld.Main``
 
 This show the ``Hello world`` message. Ctrl + c to interrupt
 
@@ -28,7 +28,7 @@ Create a JAR file
 
 For pack the main class for package as a JAR file, execute the follow command: ::
 
-  jar cfm web/Main.jar Manifest.txt HelloWorld/Main.class
+  ``jar cfm web/Main.jar Manifest.txt HelloWorld/Main.class``
 
 
 Run a JAR file
@@ -36,7 +36,7 @@ Run a JAR file
 
 For run the JAR file packed, execute the follow command: ::
 
-  java -jar Main.jar
+  ``java -jar Main.jar``
 
 This show the ``Hello world`` message and type that it's alive. Ctrl + c to interrupt
 
@@ -45,7 +45,7 @@ This show the ``Hello world`` message and type that it's alive. Ctrl + c to inte
 Docker build
 --------------
 To build local docker image run: ::
-  docker build app
+  ``docker build app``
 
 Where app is the directory, where Dockerfile is located.
 
@@ -66,33 +66,35 @@ Successfully built ca4f636e0e79
 
 ```
 After this wee can tag the local image: ::
-  docker tag ca4f636e0e79 javahelloworld
+  ``docker tag ca4f636e0e79 javahelloworld``
 
 Now we can run container from local image javahelloworld (ctrl +c to interrupt): ::
-  docker run javahelloworld
+  ``docker run javahelloworld``
 
 To run container in detached mode: ::
-  docker run --name javahelloworldapp -d javahelloworld:latest
+``  docker run --name javahelloworldapp -d javahelloworld:latest``
 
 Where javahelloworldapp is the container name
+
+Look at the status:
 ```
 docker ps
 CONTAINER ID        IMAGE                   COMMAND                CREATED             STATUS              PORTS               NAMES
 5c7e34ff4460        javahelloworld:latest   "java -jar Main.jar"   43 seconds ago      Up 42 seconds       8080/tcp            javahelloworldapp
 ```
 In order to stop running container: ::
-  docker stop javahelloworldapp
+  ``docker stop javahelloworldapp``
 or ::
-  docker stop 5c7e34ff4460
+  ``docker stop 5c7e34ff4460``
 Where 5c7e34ff4460 is the container ID
 
 To see log output of running container: ::
-  docker logs javahelloworldapp
+  ``docker logs javahelloworldapp``
 
 To follow the log (ctrl +c to interrupt): ::
-  docker logs -f 5c7e34ff4460
+  ``docker logs -f 5c7e34ff4460``
 or ::
-  docker logs -f javahelloworldapp
+  ``docker logs -f javahelloworldapp``
 
 
   Docker hub
@@ -101,17 +103,17 @@ or ::
 Create dockerhub account.
 Run `` docker login `` and enter credentials
 Create a tag by running ``docker tag LOCALIMAGE:VERSION DOCKERHUBUSER/DOCKERHUNREPO:VERSION``: ::
-  docker tag javahelloworld aliaskov/javahelloworld:latest
-
+``  docker tag javahelloworld aliaskov/javahelloworld:latest
+``
 Push image to dockerhub: ::
-  docker push aliaskov/javahelloworld
+``docker push aliaskov/javahelloworld``
 
 Also possible: ::
-  docker build -t aliaskov/javahelloworld:latest app
+  ``docker build -t aliaskov/javahelloworld:latest app``
 
 Get full image info : ::
-  docker inspect
-
+``  docker inspect aliaskov/javahelloworld
+``
 
 
 Run mysql container
@@ -204,4 +206,4 @@ services:
 Reference
 =========
 
-- `java - How to run a JAR file - Stack Overflow <http://stackoverflow.com/questions/1238145/how-to-run-a-jar-file>`_.
+- java - [How to run a JAR file - Stack Overflow] [http://stackoverflow.com/questions/1238145/how-to-run-a-jar-file]
