@@ -1,4 +1,3 @@
-#docker-compose version
 version: '3.3'
 
 services:
@@ -8,6 +7,9 @@ services:
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=r00t
+     volumes:
+      - ./db/mysql-datadir:/var/lib/mysql
+
     ports:
       - "3306:3306"
 
