@@ -21,14 +21,14 @@ For run the main class for package, execute the follow command: ::
 
   java -cp . HelloWorld.Main
 
-This show the ``Hello world`` message.
+This show the ``Hello world`` message. Ctrl + c to interrupt
 
 Create a JAR file
 -----------------
 
 For pack the main class for package as a JAR file, execute the follow command: ::
 
-  jar cfme Main.jar Manifest.txt HelloWorld.Main HelloWorld/Main.class
+  jar cfm web/Main.jar Manifest.txt HelloWorld/Main.class
 
 
 Run a JAR file
@@ -38,11 +38,149 @@ For run the JAR file packed, execute the follow command: ::
 
   java -jar Main.jar
 
-This show the ``Hello world`` message.
+This show the ``Hello world`` message and type that it's alive. Ctrl + c to interrupt
+
+
+
+Docker build
+--------------
+To build local docker image run: ::
+  docker build app
+
+Where app is the directory, where Dockerfile is located.
+
+```
+Sending build context to Docker daemon  4.096kB
+Step 1/4 : FROM openjdk:8
+ ---> c14ba9d23b3a
+Step 2/4 : ADD Main.jar Main.jar
+ ---> Using cache
+ ---> cd01ac514fc0
+Step 3/4 : EXPOSE 8080
+ ---> Using cache
+ ---> 2184856efa48
+Step 4/4 : ENTRYPOINT java -jar Main.jar
+ ---> Using cache
+ ---> ca4f636e0e79
+Successfully built ca4f636e0e79
+
+```
+After this wee can tag the local image: ::
+  docker tag ca4f636e0e79 javahelloworld
+
+Now we can run container from local image javahelloworld (ctrl +c to interrupt): ::
+  docker run javahelloworld
+
+To run container in detached mode: ::
+  docker run --name javahelloworldapp -d javahelloworld:latest
+
+Where javahelloworldapp is the container name
+```
+docker ps
+CONTAINER ID        IMAGE                   COMMAND                CREATED             STATUS              PORTS               NAMES
+5c7e34ff4460        javahelloworld:latest   "java -jar Main.jar"   43 seconds ago      Up 42 seconds       8080/tcp            javahelloworldapp
+```
+In order to stop running container: ::
+  docker stop javahelloworldapp
+or ::
+  docker stop 5c7e34ff4460
+Where 5c7e34ff4460 is the container ID
+
+To see log output of running container: ::
+  docker logs javahelloworldapp
+
+To follow the log (ctrl +c to interrupt): ::
+  docker logs -f 5c7e34ff4460
+or ::
+  docker logs -f javahelloworldapp
+
+
+  Docker hub
+  --------------
+
+Create dockerhub account.
+Run `` docker login `` and enter credentials
+Create a tag by running ``docker tag LOCALIMAGE:VERSION DOCKERHUBUSER/DOCKERHUNREPO:VERSION``: ::
+  docker tag javahelloworld aliaskov/javahelloworld:latest
+
+Push image to dockerhub: ::
+  docker push aliaskov/javahelloworld
+
+Also possible: ::
+  docker build -t aliaskov/javahelloworld:latest app
+
+
+
+
+
+
+  Docker-compose
+  --------------
+
+```
+#docker-compose version
+version: '3.3'
+
+#Services we configure to run
+services:
+
+# Database service name.
+# This name is used to refer this "service" inside of this docker-compose.yml configuration file
+# When docker-compose will be started, db container will be visible to other containers of this file by name "db"
+  db:
+
+#   By this name db container will be accessible, using docker commands, intead of container name,
+#   like, docker logs -f db
+    container_name: db
+
+#    Image, we want to build container from
+    image: mysql:5.7
+
+#   Environment variables we pass inside of the container, like JAVA_HOME
+    environment:
+      - MYSQL_ROOT_PASSWORD=r00t
+
+#   Ports we want to bind our container with host OS
+    ports:
+      - "3306:3306"
+
+# Java application service name.
+# This name is used to refer this "service" inside of this docker-compose.yml configuration file
+# When docker-compose will be started, web container will be visible to other containers of this file by name "web"
+  app:
+
+#   By this name "web" container will be accessible, using docker commands, instead of container name,
+#   like: docker logs -f db
+    container_name: app
+
+#   We define, how we want to build our container.
+#   Here, we are providing configuration to build, using Dockerfile
+    build:
+
+#     Dockerfile location
+      dockerfile: app/Dockerfile
+
+#     Dockerfile context. Like "working directory" or "workspace" of Dockerfile.
+#     This configuration provides so-called "base path" for Dockerfile
+      context: app/
+
+#   Ports we want to bind our container with host OS
+    ports:
+    - "8080:8080"
+
+#   Environment variables we pass inside of the container, like JAVA_HOME
+    environment:
+    - MYSQL_ROOT_PASSWORD=r00t
+    - MYSQL_ROOT_USERNAME=root
+    - START_DELAY=20000
+
+#   This container (web) will start only, after "db" starts.
+#   There is no reason to start web, if db is not started
+    depends_on:
+      - db
+```
 
 Reference
 =========
 
 - `java - How to run a JAR file - Stack Overflow <http://stackoverflow.com/questions/1238145/how-to-run-a-jar-file>`_.
-
-- `Setting an Application's Entry Point (The Java™ Tutorials > Deployment > Packaging Programs in JAR Files) <http://docs.oracle.com/javase/tutorial/deployment/jar/appman.html>`_.
