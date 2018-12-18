@@ -101,15 +101,23 @@ or ::
   --------------
 
 Create dockerhub account.
-Run `` docker login `` and enter credentials
-Create a tag by running ``docker tag LOCALIMAGE:VERSION DOCKERHUBUSER/DOCKERHUNREPO:VERSION``: ::
-``  docker tag javahelloworld aliaskov/javahelloworld:latest
+Run 
+`` docker login `` 
+and enter credentials.
+
+Create a tag by running 
+``docker tag LOCALIMAGE:VERSION DOCKERHUBUSER/DOCKERHUNREPO:VERSION``:
+
+``
+docker tag javahelloworld aliaskov/javahelloworld:latest
 ``
 Push image to dockerhub: ::
-``docker push aliaskov/javahelloworld``
+``docker push aliaskov/javahelloworld
+``
 
 Also possible: ::
-  ``docker build -t aliaskov/javahelloworld:latest app``
+  ``docker build -t aliaskov/javahelloworld:latest app
+  ``
 
 Get full image info : ::
 ``  docker inspect aliaskov/javahelloworld
