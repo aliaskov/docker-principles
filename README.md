@@ -124,7 +124,8 @@ Get full image info : ::
 ``
 
 
-Run mysql container
+Run Mysql container
+--------------
 
 ``  docker run -p 3306:3306 --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest
 ``
@@ -134,8 +135,6 @@ Where:
   my-secret-pw - mysql root password
   -d - detached mode
    mysql:latest - image name and version tag
-
-
 
 Stop mysql container
  `` docker stop some-mysql ``
