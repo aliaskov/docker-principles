@@ -28,7 +28,7 @@ Create a JAR file
 
 For pack the main class for package as a JAR file, execute the follow command: ::
 
-  ``jar cfm web/Main.jar Manifest.txt HelloWorld/Main.class``
+  ``jar cfm Main.jar Manifest.txt HelloWorld/Main.class``
 
 
 Run a JAR file
@@ -65,7 +65,7 @@ Step 4/4 : ENTRYPOINT java -jar Main.jar
 Successfully built ca4f636e0e79
 
 ```
-After this wee can tag the local image: 
+After this wee can tag the local image ( change ID!) : 
   ``docker tag ca4f636e0e79 javahelloworld``
 
 Now we can run container from local image javahelloworld (ctrl +c to interrupt): ::
@@ -127,7 +127,8 @@ Get full image info : ::
 Run Mysql container
 --------------
 
-``  docker run -p 3306:3306 --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest
+``  
+docker run -p 3306:3306 --name mysqlDB -e MYSQL_ROOT_PASSWORD=my-secret-pw -v /opt/mysql-data:/var/lib/mysql -d mysql:latest
 ``
 Where:
   some-mysql is the container name
@@ -135,6 +136,8 @@ Where:
   my-secret-pw - mysql root password
   -d - detached mode
    mysql:latest - image name and version tag
+  -v /opt/mysql-data:/var/lib/mysql 
+  volume mount to save DB files, where /opt/mysql-data - host dir and /var/lib/mysql - container dir
 
 Stop mysql container
  `` docker stop some-mysql ``
