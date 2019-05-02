@@ -10,5 +10,6 @@ public class Main {
             System.out.println("I'm alive!");
             Thread.sleep(1000);
         }
+	System.out.println("Hello world");
     }
 }
