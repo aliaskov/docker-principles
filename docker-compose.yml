@@ -1,18 +1,14 @@
 version: '3.3'
-
 services:
-
   app:
-    container_name: app
-    image: javahelloworld:latest
-
+   container_name: app
+   image: javahelloworld:latest
   db:
-    container_name: db
-    image: mysql:5.7
-    environment:
-      - MYSQL_ROOT_PASSWORD=r00t
-     volumes:
-      - ./db/mysql-datadir:/var/lib/mysql
-
-    ports:
-      - "3306:3306"
+   container_name: db
+   image: mysql:5.7
+   environment:
+     - MYSQL_ROOT_PASSWORD=r00t
+   volumes:
+     - ./db/mysql-datadir:/var/lib/mysql
+   ports:
+     - "3306:3306"
