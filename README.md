@@ -40,7 +40,8 @@ For run the JAR file packed, execute the follow command: ::
 
 This show the ``Hello world`` message and type that it's alive. Ctrl + c to interrupt
 
-
+### Docker ###
+![Image of Docker](https://https://github.com/aliaskov/docker-principles/blob/master/docker.png)
 
 
 Docker build
