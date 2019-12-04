@@ -1,7 +1,7 @@
 example.java.helloworld
 =======================
 
-This is "Hello World" Example for Java.
+This is "Hello World" Example for Java. Dockerized, for sure
 #########
 
 
@@ -39,6 +39,7 @@ For run the JAR file packed, execute the follow command: ::
   ``java -jar Main.jar``
 
 This show the ``Hello world`` message and type that it's alive. Ctrl + c to interrupt
+
 
 
 
