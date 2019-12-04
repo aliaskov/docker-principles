@@ -1,8 +1,8 @@
 example.java.helloworld
 =======================
-
-This is "Hello World" Example for Java. Dockerized, for sure
-#########
+##
+This is the "Hello World" Example for Java. Dockerized, for sure
+##
 
 
 Compile class
