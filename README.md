@@ -216,7 +216,7 @@ services:
 
   Multistage build
   --------------
-![simple_build](https://github.com/aliaskov/docker-principles/blob/master/simple_build.png)
+![simple_build](https://github.com/aliaskov/docker-principles/blob/master/simplebuild.png)
 ![multistage build](https://github.com/aliaskov/docker-principles/blob/master/multistage_build.png)
 
 Reference
