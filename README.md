@@ -216,9 +216,11 @@ services:
 
   Multistage build
   --------------
-
+![simple_build](https://github.com/aliaskov/docker-principles/blob/master/simple_build.png)
+![multistage build](https://github.com/aliaskov/docker-principles/blob/master/multistage_build.png)
 
 Reference
 =========
 
 - java - [How to run a JAR file - Stack Overflow] [http://stackoverflow.com/questions/1238145/how-to-run-a-jar-file]
+- multistage build [How make images small] [https://habr.com/ru/company/ruvds/blog/485650]
