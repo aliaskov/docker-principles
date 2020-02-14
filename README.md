@@ -214,6 +214,10 @@ services:
       - db
 ```
 
+  Multistage build
+  --------------
+
+
 Reference
 =========
 
