@@ -1,0 +1,33 @@
+version: '3.3'
+services:
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: blog
+    ports:
+      - 80:8080
+    volumes:
+      - ./log:/var/log
+    environment:
+      spring.datasource.url: jdbc:mysql://mysql:3306/blog?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      spring.datasource.username: root
+      spring.datasource.password: secret
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    healthcheck:
+      test: mysql --protocol=socket -hlocalhost -uroot -p$$MYSQL_ROOT_PASSWORD -e 'SELECT 1'
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: blog
+    ports:
+      - "3306:3306"
+    volumes:
+      - my-datavolume:/var/lib/mysql
+    command: mysqld --sql_mode=""
+
+volumes:
+  my-datavolume:
