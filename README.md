@@ -251,3 +251,4 @@ Reference
 
 To run debug container with aws-cli
 ```docker run -it --rm -v "$(pwd)":/src -v "$HOME/.aws":/root/.aws amazon/aws-cli bash
+```
