@@ -250,5 +250,5 @@ Reference
 - multistage build [How make images small] [https://habr.com/ru/company/ruvds/blog/485650]
 
 To run debug container with aws-cli
-```docker run -it --rm -v "$(pwd)":/src -v "$HOME/.aws":/root/.aws amazon/aws-cli bash
-```
+`` docker run -it --rm -v "$(pwd)":/src -v "$HOME/.aws":/root/.aws amazon/aws-cli bash ``
+
