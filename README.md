@@ -1,8 +1,13 @@
+Что общего между devopsом и бомжом?
+оба хорошо разбираются в контейнерах.
+
+
+
 example.java.helloworld
 =======================
-
-This is "Hello World" Example for Java.
-
+##
+This is the "Hello World" Example for Java. Dockerized, for sure
+##
 
 
 Compile class
@@ -40,6 +45,8 @@ For run the JAR file packed, execute the follow command: ::
 
 This show the ``Hello world`` message and type that it's alive. Ctrl + c to interrupt
 
+### Docker ###
+![Image of Docker](https://github.com/aliaskov/docker-principles/blob/master/docker.png)
 
 
 Docker build
@@ -212,7 +219,36 @@ services:
       - db
 ```
 
+  Multistage build
+  --------------
+![simple_build](https://github.com/aliaskov/docker-principles/blob/master/simplebuild.png)
+![multistage build](https://github.com/aliaskov/docker-principles/blob/master/multistage_build.png)
+
+```
+#
+# Build stage
+#
+FROM maven:3.6.0-jdk-8 AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip=true
+
+
+#
+# Package stage
+#
+FROM openjdk:8-jdk-slim
+COPY --from=build /home/app/target/project-0.0.1-SNAPSHOT.jar /usr/local/lib/accounting.jar
+EXPOSE 8099
+ENTRYPOINT ["java","-jar","/usr/local/lib/accounting.jar"]
+```
+
 Reference
 =========
 
 - java - [How to run a JAR file - Stack Overflow] [http://stackoverflow.com/questions/1238145/how-to-run-a-jar-file]
+- multistage build [How make images small] [https://habr.com/ru/company/ruvds/blog/485650]
+
+To run debug container with aws-cli
+`` docker run -it --rm -v "$(pwd)":/src -v "$HOME/.aws":/root/.aws amazon/aws-cli bash ``
+
