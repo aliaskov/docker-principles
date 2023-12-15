@@ -12,3 +12,56 @@ services:
      - ./db/mysql-datadir:/var/lib/mysql
    ports:
      - "3306:3306"
+
+
+
+
+
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=111111222
+      - POSTGRES_DB=phonebook
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: ./
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/phonebook
+      - SPRING_FLYWAY_URL=jdbc:postgresql://db:5432/phonebook
+      - SPRING_FLYWAY_USER=postgres
+      - SPRING_FLYWAY_PASSWORD=111111222
+      - SPRING_DATASOURCE_PASSWORD=111111222
+      - SPRING_DATASOURCE_username=postgres
+      - POSTGRES_DB=phonebook
+    ports:
+      - "8080:8080"
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin-t.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+#    volumes:
+#      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+
+#  volumes:
+#    db:
+#    pgadmin:
