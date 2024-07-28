@@ -1,0 +1,22 @@
+# Этап 1: Установка зависимостей и сборка приложения
+FROM python:3.9-slim
+WORKDIR /app
+
+# Установка зависимостей для сборки
+RUN apt-get update && apt-get install -y build-essential
+
+# Копирование и установка Python-зависимостей
+COPY requirements.txt .
+RUN pip install --user -r requirements.txt
+
+# Копирование исходного кода
+COPY . .
+
+# Настройка переменной окружения
+ENV PATH=/root/.local/bin:$PATH
+
+# Открытие порта 5000
+EXPOSE 5000
+
+# Команда для запуска приложения
+CMD ["python", "app.py"]
