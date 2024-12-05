@@ -7,7 +7,12 @@ public class Main {
         System.out.println("Hello from Andrew");
         System.out.println("Hello again");
         while(flag != false) {
-            System.out.println("I'm alive!");
+            System.out.println("I'm still alive!");
+            System.out.println("I'm still alive!");
+            System.out.println("I'm still alive!");
+            System.out.println("I'm still alive!");
+            System.out.println("I'm still alive!");
+            System.out.println("I'm still alive!");
             Thread.sleep(1000);
         }
     }
