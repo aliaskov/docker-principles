@@ -1,0 +1,30 @@
+# Этап сборки
+FROM node:18-slim AS builder
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем package.json и package-lock.json для установки зависимостей
+COPY package*.json ./
+
+# Устанавливаем только production-зависимости
+RUN npm install --production
+
+# Копируем исходный код
+COPY ./app.js ./app.js
+
+# Финальный этап
+FROM node:18-slim
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем собранные файлы из builder
+COPY --from=builder /app /app
+
+# Устанавливаем порт
+ENV PORT=5000
+EXPOSE $PORT
+
+# Запускаем приложение
+CMD ["node", "app.js"]
