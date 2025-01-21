@@ -1,0 +1,21 @@
+# Базовый образ
+FROM node:18-slim
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем package.json и package-lock.json для установки зависимостей
+COPY package*.json ./
+
+# Устанавливаем зависимости
+RUN npm install
+
+# Копируем весь исходный код
+COPY ./app.js ./app.js
+
+# Устанавливаем порт
+ENV PORT=5001
+EXPOSE $PORT
+
+# Запускаем приложение
+CMD ["node", "app.js"]
